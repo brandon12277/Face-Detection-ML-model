@@ -1,0 +1,126 @@
+<!-- CSS -->
+<head>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<style>
+    #my_camera{
+     display:flex;
+     width:100%;
+     height:100%;
+       align-items:center;
+       justify-content:center;
+        border: 5px solid black;
+    }
+     html,body{
+       display:flex;
+       align-items:center;
+       justify-content:center;
+       width:100%;
+       height:100%;
+    }
+    .cont{
+    border-radius:10%;
+
+     display:flex;
+       align-items:center;
+       justify-content:center;
+       flex-direction:column;
+       padding:5%;
+
+    }
+    .submit{
+    background-color:red;
+    padding:1%;
+    }
+    .card,.card-body{
+     width:30rem;
+     height:90%;
+    }
+    #second_cont{
+    width:100%;
+    height:100%;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    }
+    </style>
+
+    <!-- -->
+<body>
+
+ <div class="cont" id="first_cont">
+       <div class="card" style="padding:10%">
+  <div class="card-body" style="padding:10%">
+    <h5 style="padding:5%" class="card-title">Face Registartionn</h5>
+    <h6 style="padding:5%" class="card-subtitle mb-2 text-muted"> Press register button to take record of your face</h6>
+      <h6 style="padding:5%" class="card-subtitle mb-2 text-muted"> make sure that your face is clear in the frame.It will be advised to not use an headgear or any unwanted equipment while taking record of face</h6>
+
+      <div id="my_camera"></div>
+   <div id="count" ></div>
+    <div id="results" ></div>
+<button style="margin:5%" class="btn btn-primary" id="register">Register Face data</button>
+<form action="/results" method="POST">
+    <input type="text" name="photo_data" id="photo" style="display:none">
+    <input type="text" name="username" id="user" value={{username}} style="display:none">
+     <input type="text" name="roll" id="roll" value={{roll}} style="display:none">
+    <button id="submit" style="margin:5%" class="btn btn-primary">Submit</button>
+</form>
+
+  </div>
+</div>
+
+
+
+   </div>
+<div id="second_cont">
+    Saving Data AND Training Machine learning model............
+</div>
+</body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!-- Script -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+
+    <!-- Code to handle taking the snapshot and displaying it locally -->
+    <script language="JavaScript">
+
+     // Configure a few settings and attach camera
+     Webcam.set({
+         width: 320,
+         height: 240,
+         image_format: 'jpeg',
+         jpeg_quality: 90
+     });
+     Webcam.attach( '#my_camera' );
+
+     // preload shutter audio clip
+
+
+    function take_snapshot(count) {
+       // play sound effect
+
+       // take snapshot and get image data
+       Webcam.snap( function(data_uri) {
+          // display results in page
+          let text=document.getElementById('photo').value
+          if(count!=70)text+=data_uri+"*";
+          else
+          text+=data_uri;
+          document.getElementById('photo').value=text;
+
+        });
+    }
+    document.getElementById("register").addEventListener("click",()=>{
+
+       count=1;
+         let id=setInterval(()=>{
+           take_snapshot(count);
+          document.getElementById('count').innerHTML="Number of records taken : "+(count++);
+          if(count==71)clearInterval(id);
+         },100)
+      })
+       document.getElementById("submit").addEventListener("click",()=>{
+        document.getElementById("first_cont").style.display="none";
+         document.getElementById("second_cont").style.display="flex";
+       })
+    </script>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    html,body{
+       display:flex;
+       align-items:center;
+       justify-content:center;
+       width:100%;
+       height:100%;
+    }
+    .cont{
+    border-radius:10%;
+
+     display:flex;
+       align-items:center;
+       justify-content:center;
+       flex-direction:column;
+       padding:5%;
+
+    }
+    .submit{
+    background-color:red;
+    padding:1%;
+    }
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Face_record_app</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+   <div class="cont">
+       <div class="card" style="width: 18rem;padding:5%">
+  <div class="card-body" style="padding:5%">
+    <h5 style="padding:5%" class="card-title">Face Image Saver Trial</h5>
+    <h6 style="padding:5%" class="card-subtitle mb-2 text-muted"> Press below button to take record of your face</h6>
+      <h6 style="padding:5%" class="card-subtitle mb-2 text-muted"> Insert your username below</h6>
+
+       <form action="/videofeed" method="POST">
+            Username : <input style="margin:5%"type="text" name="username">
+            Roll : <input style="margin:5%"type="text" name="roll">
+            <button style="margin:5%" class="btn btn-primary">Register</button>
+       </form>
+       <form action="/modeltest" method="GET">
+            <button style="margin:5%" class="btn btn-primary">Test Model</button>
+       </form>
+ <h6 style="padding:5%" class="card-subtitle mb-2 text-muted">{{notice}}</h6>
+  </div>
+</div>
+
+
+
+   </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
